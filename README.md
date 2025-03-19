@@ -1,25 +1,25 @@
-# Mood API - Сервис анализа настроения текста
+# Mood API - Text Sentiment Analysis Service
 
-Mood API - это сервис для анализа эмоциональной окраски текста. Сервис использует модель машинного обучения для определения настроения текста и возвращает оценку с указанием уверенности.
+Mood API is a service for analyzing the emotional tone of text. The service uses machine learning to determine text sentiment and returns an assessment with confidence level.
 
 ## Endpoints
 
-Сервис предоставляет следующие endpoints:
+The service provides the following endpoints:
 
-### 1. Анализ настроения текста
+### 1. Text Sentiment Analysis
 
 **Endpoint:** `POST /api/v1/analyze`
 
 **Content-Type:** `application/json`
 
-**Тело запроса:**
+**Request body:**
 ```json
 {
-    "text": "Ваш текст для анализа"
+    "text": "Your text to analyze"
 }
 ```
 
-**Пример ответа:**
+**Example response:**
 ```json
 {
     "sentiment": "Very Positive",
@@ -27,147 +27,147 @@ Mood API - это сервис для анализа эмоциональной 
 }
 ```
 
-Где:
-- `sentiment` - оценка настроения текста:
-  - `Very Positive` - очень позитивное
-  - `Positive` - позитивное
-  - `Neutral` - нейтральное
-  - `Negative` - негативное
-  - `Very Negative` - очень негативное
-- `score` - уверенность модели в оценке (от 0 до 1):
-  - Значения ближе к 1.0 означают высокую уверенность
-  - Значения около 0.5 означают среднюю уверенность
-  - Чем ближе к 0, тем ниже уверенность
+Where:
+- `sentiment` - text sentiment assessment:
+  - `Very Positive` - very positive
+  - `Positive` - positive
+  - `Neutral` - neutral
+  - `Negative` - negative
+  - `Very Negative` - very negative
+- `score` - model confidence in the assessment (from 0 to 1):
+  - Values closer to 1.0 indicate high confidence
+  - Values around 0.5 indicate medium confidence
+  - Values closer to 0 indicate low confidence
 
-### 2. Проверка работоспособности сервиса
+### 2. Health Check
 
 **Endpoint:** `GET /api/v1/health`
 
-**Пример ответа:**
+**Example response:**
 ```json
 {
     "status": "OK"
 }
 ```
 
-## Примеры использования
+## Usage Examples
 
-### Использование curl
+### Using curl
 
-1. Проверка работоспособности:
+1. Health check:
 ```bash
 curl http://localhost:8080/api/v1/health
 ```
 
-2. Анализ текста:
+2. Text analysis:
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"text":"Я очень рад сегодня!"}' \
+  -d '{"text":"I am very happy today!"}' \
   http://localhost:8080/api/v1/analyze
 ```
 
-### Использование Postman
+### Using Postman
 
-1. Проверка работоспособности (Health Check):
-   - Метод: `GET`
+1. Health Check:
+   - Method: `GET`
    - URL: `http://localhost:8080/api/v1/health`
-   - Не требует дополнительных заголовков или тела запроса
+   - No additional headers or request body required
 
-2. Анализ текста:
-   - Метод: `POST`
+2. Text Analysis:
+   - Method: `POST`
    - URL: `http://localhost:8080/api/v1/analyze`
-   - Заголовки:
+   - Headers:
      - Key: `Content-Type`
      - Value: `application/json`
    - Body:
-     - Выберите тип `raw`
-     - Выберите формат `JSON`
-     - Введите:
+     - Select type `raw`
+     - Select format `JSON`
+     - Enter:
      ```json
      {
-         "text": "Ваш текст для анализа"
+         "text": "Your text to analyze"
      }
      ```
 
-### Использование Postman для удаленного доступа
+### Remote Access via Postman
 
-1. Проверка работоспособности (Health Check):
-   - Метод: `GET`
-   - URL: `http://<IP-адрес-сервера>:8080/api/v1/health`
-   - Не требует дополнительных заголовков или тела запроса
+1. Health Check:
+   - Method: `GET`
+   - URL: `http://<server-ip>:8080/api/v1/health`
+   - No additional headers or request body required
 
-2. Анализ текста:
-   - Метод: `POST`
-   - URL: `http://<IP-адрес-сервера>:8080/api/v1/analyze`
-   - Заголовки:
+2. Text Analysis:
+   - Method: `POST`
+   - URL: `http://<server-ip>:8080/api/v1/analyze`
+   - Headers:
      - Key: `Content-Type`
      - Value: `application/json`
    - Body:
-     - Выберите тип `raw`
-     - Выберите формат `JSON`
-     - Введите:
+     - Select type `raw`
+     - Select format `JSON`
+     - Enter:
      ```json
      {
-         "text": "Ваш текст для анализа"
+         "text": "Your text to analyze"
      }
      ```
 
-Где `<IP-адрес-сервера>` нужно заменить на реальный IP-адрес вашего сервера.
+Replace `<server-ip>` with your server's IP address.
 
-Пример для текущего сервера:
+Example for current server:
 ```
 http://185.212.148.199:8080/api/v1/analyze
 ```
 
-#### Настройка Postman для удаленного доступа:
+#### Setting up Postman for Remote Access:
 
-1. Откройте Postman
-2. Создайте новую коллекцию (New Collection)
-3. Добавьте новый запрос (New Request)
-4. В поле URL введите полный адрес с IP сервера
-5. Выберите соответствующий метод (GET или POST)
-6. Для POST запроса:
-   - Перейдите во вкладку "Body"
-   - Выберите "raw"
-   - В выпадающем списке справа выберите "JSON"
-   - Введите тело запроса в формате JSON
+1. Open Postman
+2. Create a new collection (New Collection)
+3. Add a new request (New Request)
+4. Enter the full URL with server IP
+5. Select the appropriate method (GET or POST)
+6. For POST requests:
+   - Go to the "Body" tab
+   - Select "raw"
+   - Select "JSON" from the dropdown on the right
+   - Enter the request body in JSON format
 
-#### Советы по работе с удаленным API:
+#### Tips for Working with Remote API:
 
-1. Убедитесь, что порт 8080 открыт на сервере
-2. Проверьте доступность сервера через ping
-3. Сначала проверьте endpoint /health для подтверждения работоспособности сервиса
-4. При возникновении ошибок проверьте:
-   - Правильность IP-адреса
-   - Правильность порта
-   - Корректность JSON-формата в теле запроса
-   - Наличие всех необходимых заголовков
+1. Ensure port 8080 is open on the server
+2. Check server availability via ping
+3. First check the /health endpoint to confirm service availability
+4. If errors occur, check:
+   - Correct IP address
+   - Correct port
+   - Valid JSON format in request body
+   - All required headers are present
 
-## Коды ответов
+## Response Codes
 
-- `200 OK` - запрос успешно обработан
-- `400 Bad Request` - неверный формат запроса
-- `500 Internal Server Error` - внутренняя ошибка сервера
+- `200 OK` - request successfully processed
+- `400 Bad Request` - invalid request format
+- `500 Internal Server Error` - internal server error
 
-## Ограничения
+## Limitations
 
-1. Поле `text` не может быть пустым
-2. Рекомендуется использовать тексты на русском или английском языках
-3. Для получения более точных результатов рекомендуется использовать тексты длиной от 3 до 500 слов
+1. The `text` field cannot be empty
+2. Russian or English text is recommended
+3. For more accurate results, use texts between 3 and 500 words
 
-## Примеры запросов и ответов
+## Request and Response Examples
 
-### Позитивный текст
+### Positive Text
 
-**Запрос:**
+**Request:**
 ```json
 {
-    "text": "Я очень рад сегодня!"
+    "text": "I am very happy today!"
 }
 ```
 
-**Ответ:**
+**Response:**
 ```json
 {
     "sentiment": "Very Positive",
@@ -175,16 +175,16 @@ http://185.212.148.199:8080/api/v1/analyze
 }
 ```
 
-### Негативный текст
+### Negative Text
 
-**Запрос:**
+**Request:**
 ```json
 {
-    "text": "Это был ужасный день."
+    "text": "This was a terrible day."
 }
 ```
 
-**Ответ:**
+**Response:**
 ```json
 {
     "sentiment": "Very Negative",
@@ -192,16 +192,16 @@ http://185.212.148.199:8080/api/v1/analyze
 }
 ```
 
-### Нейтральный текст
+### Neutral Text
 
-**Запрос:**
+**Request:**
 ```json
 {
-    "text": "Сегодня обычный день."
+    "text": "Today is an ordinary day."
 }
 ```
 
-**Ответ:**
+**Response:**
 ```json
 {
     "sentiment": "Neutral",
@@ -209,192 +209,145 @@ http://185.212.148.199:8080/api/v1/analyze
 }
 ```
 
-## Технический стек
+## Technical Stack
 
 - Go
-- Gin (веб-фреймворк)
+- Gin (web framework)
 - Docker
-- ML-модель для анализа настроения
+- ML model for sentiment analysis
 
-## Установка и запуск
+## Installation and Setup
 
-### Требования
+### Requirements
 
-- Go 1.16 или выше
-- Docker и Docker Compose (опционально)
+- Go 1.16 or higher
+- Docker and Docker Compose (optional)
 
-### Локальный запуск
+### Local Setup
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
 ```bash
-git clone [url-репозитория]
+git clone [repository-url]
 cd mood
 ```
 
-2. Установите зависимости:
+2. Install dependencies:
 ```bash
 go mod download
 ```
 
-3. Создайте файл `.env` на основе `app.env`:
+3. Create `.env` file based on `app.env`:
 ```bash
 cp app.env .env
 ```
 
-4. Запустите сервис:
+4. Run the service:
 ```bash
 go run .
 ```
 
-### Запуск через Docker
+### Docker Setup
 
 ```bash
 docker-compose up --build
 ```
 
-## API Endpoints
-
-### 1. Анализ настроения
-```
-POST /api/v1/analyze
-```
-
-**Запрос:**
-```json
-{
-    "text": "Текст для анализа"
-}
-```
-
-**Ответ:**
-```json
-{
-    "sentiment": "positive",
-    "created_at": 1647523200,
-    "score": 0.85
-}
-```
-
-### 2. Проверка здоровья
-```
-GET /api/v1/health
-```
-
-**Ответ:**
-```json
-{
-    "status": "ok"
-}
-```
-
-### 3. Прямой вызов ML-модели
-```
-POST /api/v1/model
-```
-
-## Конфигурация
-
-Сервис настраивается через переменные окружения в файле `.env`:
-
-- `PORT` - порт для запуска сервера (по умолчанию: 8080)
-- `ML_MODEL_URL` - URL эндпоинта ML-модели
-
-## Структура проекта
+## Project Structure
 
 ```
 .
-├── main.go          # Точка входа приложения
-├── service.go       # Бизнес-логика
-├── handler.go       # HTTP-обработчики
-├── model.go         # Модели данных
-├── config.go        # Конфигурация
+├── main.go          # Application entry point
+├── service.go       # Business logic
+├── handler.go       # HTTP handlers
+├── model.go         # Data models
+├── config.go        # Configuration
 ├── docker-compose.yaml
-└── ml_mood/         # ML-модель
+└── ml_mood/         # ML model
 ```
 
-## Разработка
+## Development
 
-### Добавление новых функций
+### Adding New Features
 
-1. Добавьте новые модели в `model.go`
-2. Реализуйте бизнес-логику в `service.go`
-3. Создайте обработчики в `handler.go`
-4. Добавьте новые маршруты в `setupRouter` в `main.go`
+1. Add new models in `model.go`
+2. Implement business logic in `service.go`
+3. Create handlers in `handler.go`
+4. Add new routes in `setupRouter` in `main.go`
 
-### Тестирование
+### Testing
 
 ```bash
 go test ./...
 ```
 
-## Внесение изменений в проект
+## Contributing
 
-### Как внести свой вклад
+### How to Contribute
 
-1. Создайте форк репозитория
-2. Создайте ветку для ваших изменений:
+1. Fork the repository
+2. Create a branch for your changes:
    ```bash
-   git checkout -b feature/название-функции
+   git checkout -b feature/feature-name
    ```
-3. Внесите изменения и зафиксируйте их:
+3. Make changes and commit them:
    ```bash
    git add .
-   git commit -m "Описание изменений"
+   git commit -m "Description of changes"
    ```
-4. Отправьте изменения в ваш форк:
+4. Push changes to your fork:
    ```bash
-   git push origin feature/название-функции
+   git push origin feature/feature-name
    ```
-5. Создайте Pull Request в основной репозиторий
+5. Create a Pull Request to the main repository
 
-### Правила оформления кода
+### Code Style Guidelines
 
-1. Используйте `gofmt` для форматирования Go кода
-2. Добавляйте комментарии к публичным функциям и структурам
-3. Обновляйте документацию при внесении изменений
-4. Добавляйте тесты для новой функциональности
+1. Use `gofmt` for Go code formatting
+2. Add comments to public functions and structures
+3. Update documentation when making changes
+4. Add tests for new functionality
 
-### Запуск тестов
+### Running Tests
 
 ```bash
-# Запуск всех тестов
+# Run all tests
 go test ./...
 
-# Запуск тестов с покрытием
+# Run tests with coverage
 go test ./... -cover
 ```
 
-### Сборка проекта
+### Building the Project
 
 ```bash
-# Локальная сборка
+# Local build
 go build
 
-# Сборка Docker образа
+# Build Docker image
 docker build -t mood-api .
 ```
 
-### Запуск в Docker
+### Running with Docker
 
 ```bash
-# Запуск всех сервисов
+# Run all services
 docker compose up --build
 
-# Запуск в фоновом режиме
+# Run in background
 docker compose up -d --build
 
-# Остановка сервисов
+# Stop services
 docker compose down
 ```
 
-## Лицензия
+## License
 
 MIT
 
-## Авторы
+## Authors
 
-- [bkzntsv](https://github.com/bkzntsv) - Создатель проекта
+- [bkzntsv](https://github.com/bkzntsv) - Project Creator
 
-## Поддержка
+## Support
 
-Если у вас есть вопросы или предложения, создайте issue в репозитории проекта или свяжитесь с автором через GitHub. 
+If you have questions or suggestions, create an issue in the repository or contact the author via GitHub. 
