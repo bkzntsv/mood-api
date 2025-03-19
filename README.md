@@ -15,6 +15,30 @@ docker compose up --build
 
 The service will be available at `http://localhost:8080`
 
+## Live Demo
+
+The service is currently deployed at:
+```
+http://185.212.148.199:8080
+```
+
+### Example Request
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"text":"I am very happy today!"}' \
+  http://185.212.148.199:8080/api/v1/analyze
+```
+
+Expected response:
+```json
+{
+    "sentiment": "Very Positive",
+    "score": 0.8534
+}
+```
+
 ## API Endpoints
 
 ### 1. Text Sentiment Analysis
@@ -91,12 +115,6 @@ curl -X POST \
 - Docker & Docker Compose
 - Python ML service with transformers
 
-## System Requirements
-
-- Docker & Docker Compose
-- 4GB RAM minimum
-- 2 CPU cores minimum
-
 ## Development Setup
 
 1. Install Go 1.21 or higher
@@ -119,32 +137,29 @@ go run .
 
 ```
 .
-├── main.go          # Application entry point
-├── service.go       # Business logic
-├── handler.go       # HTTP handlers
-├── model.go         # Data models
-├── config.go        # Configuration
-├── docker-compose.yaml
+├── main.go          # Application entry point and router setup
+├── service.go       # Business logic and ML service integration
+├── handler.go       # HTTP request handlers
+├── model.go         # Data structures and request/response models
+├── config.go        # Configuration management
+├── app.env          # Environment variables template
+├── docker-compose.yaml  # Docker services configuration
 └── ml_mood/         # ML model service
+    ├── model_server.py  # FastAPI server for ML model
+    ├── requirements.txt # Python dependencies
+    └── Dockerfile      # ML service container configuration
 ```
 
-## Troubleshooting
+### Key Files Description
 
-### Common Issues
-
-1. **Service not starting**
-   - Check if ports 8080 and 8000 are available
-   - Verify Docker is running
-   - Check logs: `docker compose logs`
-
-2. **ML service errors**
-   - Ensure enough RAM is available
-   - Check Python service logs: `docker compose logs ml-mood-python`
-
-3. **Connection issues**
-   - Verify network connectivity
-   - Check firewall settings
-   - Ensure correct ports are exposed
+- `main.go`: Sets up the HTTP server, routes, and middleware
+- `service.go`: Contains the core business logic and integration with the ML service
+- `handler.go`: Implements HTTP request handlers and response formatting
+- `model.go`: Defines data structures for requests, responses, and internal models
+- `config.go`: Manages application configuration and environment variables
+- `docker-compose.yaml`: Orchestrates both Go and Python services
+- `ml_mood/model_server.py`: Implements the ML model inference service
+- `ml_mood/requirements.txt`: Lists Python dependencies for the ML service
 
 ## Contributing
 
