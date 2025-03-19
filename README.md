@@ -1,6 +1,6 @@
 # Mood API - Text Sentiment Analysis Service
 
-Mood API is a service for analyzing the emotional tone of text. The service uses machine learning to determine text sentiment and returns an assessment with confidence level.
+Mood API is a multi-language service for analyzing the emotional tone of text. The service uses machine learning to determine text sentiment and returns an assessment with confidence level.
 
 ## Quick Start
 
