@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  ml-mood-python:
+    build:
+      context: ml_mood
+    ports:
+      - "8000:8000"
+  ml-mood-go:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      MODEL_ENDPOINT: http://ml-mood-python:8000/predict
+    depends_on:
+      - ml-mood-python
