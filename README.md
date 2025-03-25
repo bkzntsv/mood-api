@@ -15,29 +15,6 @@ docker compose up --build
 
 The service will be available at `http://localhost:8080`
 
-## Live Demo
-
-The service is currently deployed at:
-```
-http://185.212.148.199:8080
-```
-
-### Example Request
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"text":"I am very happy today!"}' \
-  http://185.212.148.199:8080/api/v1/analyze
-```
-
-Expected response:
-```json
-{
-    "sentiment": "Very Positive",
-    "score": 0.8534
-}
-```
 
 ## API Endpoints
 
